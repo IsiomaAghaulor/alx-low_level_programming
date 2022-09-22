@@ -1,27 +1,43 @@
 #include "main.h"
+#
 
 /**
  *leet -> a function that encodes a string into 1337.
- *@x:parameter1
+ *@str:parameter1
  *Return:string
  */
-char *leet(char *x)
+char *leet(char *str)
 {
-	int a = 0, b, l = 5;
-	char tr[5] = {'A', 'E', 'O', 'T', 'L'};
-	char trw[5] = {'4', '3', '0', '7', '1'};
+	int i = 0;
 
-	while (x[a])
+	while (str[i] != '\0')
 	{
-		b = 0;
-
-		while (b < l)
-		{
-		     if (x[a] == tr[b] || x[a] - 32 == tr[b])
-				x[a] == trw[b];
-			b++;
-		}
-		a++;
+		str[i] = transform(str[i]);
+		i++;
 	}
-	return (x);
+	return (str);
+}
+
+/**
+ *transform -> maps a letter with its leet encoding
+ *@x:char to be encoded
+ *Return: the encoded char
+ */
+char transform(char x)
+{
+	char mapping_low[8] = {'o', 'l', '\0', 'e', 'a', '\0', 't'};
+	char mappint_upper[8] = {'O', 'L', '\0', 'E', 'A', '\0', 'T'};
+	int i = 0;
+	char replacement = x;
+
+	while (i < 8)
+	{
+		if (x == mapping_low[i] || x == mappint_upper[i])
+		{
+			replacement = i + '0';
+			break;
+		}
+		i++;
+	}
+	return (replacement);
 }
